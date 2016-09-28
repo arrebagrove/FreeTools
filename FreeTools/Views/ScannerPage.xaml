@@ -1,0 +1,49 @@
+﻿<Page
+    x:Class="FreeTools.Views.ScannerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FreeTools.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Scanner, Source={StaticResource Locator}}">
+
+    <Grid>
+        <Image x:Name="PreviewImage"
+               Stretch="UniformToFill" />
+
+        <Grid VerticalAlignment="Bottom"
+              Visibility="{Binding ScannedText, Converter={StaticResource StringLengthToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}">
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <EdgeUIThemeTransition Edge="Bottom" />
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" 
+                   Text="Scanned text"
+                   Margin="19,12,12,0"
+                   Style="{ThemeResource ControlHeaderTextBlockStyle}" />
+
+            <TextBlock Grid.Row="1" 
+                   Text="{Binding ScannedText}"
+                   TextWrapping="Wrap"
+                   Margin="19,12,12,12"
+                   Style="{ThemeResource BodyTextBlockStyle}" />
+
+            <Button Grid.Row="2" 
+                    Content="Launch url" 
+                    Visibility="{Binding ScannedText, Converter={StaticResource StringLengthToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding LaunchUrlCommand}"
+                    Margin="19,0,0,0" />
+        </Grid>
+    </Grid>
+</Page>

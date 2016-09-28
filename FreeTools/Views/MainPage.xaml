@@ -1,0 +1,101 @@
+﻿<Page
+    x:Class="FreeTools.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FreeTools"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Main, Source={StaticResource Locator}}">
+
+    <Grid>
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Margin="19,0,0,0">
+            <TextBlock Grid.Row="0" 
+                   Text="{Binding PackageName}" 
+                   Style="{ThemeResource TitleTextBlockStyle}" 
+                   Margin="0,12,0,0"/>
+
+            <TextBlock Text="home" 
+                       Margin="0,-6.5,0,16.5" 
+                       Style="{ThemeResource HeaderTextBlockStyle}" 
+                       CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+        </StackPanel>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <StackPanel Grid.Row="1" Margin="19,9.5,19,0">
+            <ToggleSwitch Header="Turn Flashlight" 
+                          IsEnabled="{Binding TorchSupported, UpdateSourceTrigger=PropertyChanged}"
+                          IsOn="{Binding FlashTurnedOn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            
+            <Slider Header="Light intensity" 
+                    Visibility="{Binding FlashPowerSupported, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Value="{Binding FlashPowerValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                    Minimum="0"
+                    Maximum="1.0"
+                    SnapsTo="StepValues"
+                    StepFrequency="0.25"
+                    TickFrequency="0.25"
+                    TickPlacement="Inline"
+                    Margin="0,9.5,0,0" />
+
+            <Grid Visibility="{Binding FlashPowerSupported, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <Viewbox Grid.Column="0" 
+                         Width="120" 
+                         Height="40">
+                    <Path Width="480"  
+                          Stretch="Fill" 
+                          StrokeLineJoin="Round" 
+                          StrokeThickness="11" 
+                          Stroke="{ThemeResource PhoneForegroundBrush}" 
+                          Fill="Transparent" 
+                          Data="F1 M 128,272.667L 416,272.667L 512,240.667L 512,400.667L 416,368.667L 128,368.667L 128,272.667 Z "/>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" 
+                         Height="40" 
+                         Opacity="{Binding FlashPowerValue, UpdateSourceTrigger=PropertyChanged}">
+                    <Path Height="193" 
+                          Stretch="Fill" 
+                          StrokeLineJoin="Round" 
+                          Stroke="Transparent" 
+                          StrokeThickness="0" 
+                          Fill="{ThemeResource PhoneAccentBrush}" 
+                          Data="F1 M 128,288L 512,224L 512,416L 128,352L 128,288 Z " 
+                          UseLayoutRounding="False" 
+                          Width="1100"/>
+                </Viewbox>
+            </Grid>
+
+            <TextBlock Text="QR code scanner" 
+                       Style="{ThemeResource ControlHeaderTextBlockStyle}" 
+                       Margin="0,19,0,0" />
+            <Button Content="Scan QR code"
+                    Command="{Binding GoToScannerCommand}" />
+
+            <TextBlock Text="Background media player" 
+                       Style="{ThemeResource ControlHeaderTextBlockStyle}" 
+                       Margin="0,19,0,0" />
+            <Button Content="Stop player"
+                    IsEnabled="{Binding BackgroundMediaPlayerActive}"
+                    Command="{Binding StopBackgroundMediaPlayerCommand}" />
+        </StackPanel>
+    </Grid>
+</Page>
