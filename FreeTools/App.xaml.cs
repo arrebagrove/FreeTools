@@ -1,6 +1,7 @@
 ﻿using FreeTools.Helpers;
 using FreeTools.ViewModels;
 using FreeTools.Views;
+using GalaSoft.MvvmLight.Threading;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -92,6 +93,8 @@ namespace FreeTools
             Window.Current.Activate();
 
             Locator.Main.UpdateBackgroundPlayerStatus();
+
+            DispatcherHelper.Initialize();
         }
 
         private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)

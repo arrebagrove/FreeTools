@@ -8,13 +8,33 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding Scanner, Source={StaticResource Locator}}">
+    <Page.Resources>
+        <Storyboard x:Name="ShowResultStoryboard">
+            <DoubleAnimation Duration="0:0:0.6" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ResultGrid" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase Exponent="6" EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="0:0:0.6" To="100" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ResultGrid" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="HideResultStoryboard">
+            <DoubleAnimation Duration="0:0:0.3" To="300" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ResultGrid" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.3" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ResultGrid" d:IsOptimized="True"/>
+        </Storyboard>
+    </Page.Resources>
 
     <Grid>
         <Image x:Name="PreviewImage"
-               Stretch="UniformToFill" />
+               Stretch="UniformToFill"
+               Opacity="{Binding ScannedText, Converter={StaticResource StringLengthToOpacityConverter}}" />
 
-        <Grid VerticalAlignment="Bottom"
-              Visibility="{Binding ScannedText, Converter={StaticResource StringLengthToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}">
+        <Grid x:Name="ResultGrid" VerticalAlignment="Bottom"
+              Background="{ThemeResource ContentDialogBackgroundThemeBrush}"
+              RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <CompositeTransform TranslateY="300" />
+            </Grid.RenderTransform>
+            
             <Grid.ChildrenTransitions>
                 <TransitionCollection>
                     <EdgeUIThemeTransition Edge="Bottom" />
@@ -36,14 +56,38 @@
             <TextBlock Grid.Row="1" 
                    Text="{Binding ScannedText}"
                    TextWrapping="Wrap"
-                   Margin="19,12,12,12"
+                   Margin="19,12,12,0"
                    Style="{ThemeResource BodyTextBlockStyle}" />
 
-            <Button Grid.Row="2" 
-                    Content="Launch url" 
-                    Visibility="{Binding ScannedText, Converter={StaticResource StringLengthToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
-                    Command="{Binding LaunchUrlCommand}"
-                    Margin="19,0,0,0" />
+            <Grid Grid.Row="2" 
+                  Visibility="{Binding ScannedText, Converter={StaticResource StringLengthToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"      
+                  Margin="19,9.5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="Launch url" 
+                        Command="{Binding LaunchUrlCommand}" 
+                        Visibility="{Binding IsUrl, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        HorizontalAlignment="Stretch" />
+
+                <Button Grid.Column="2" Content="Cancel" 
+                        Command="{Binding CancelCommand}" 
+                        HorizontalAlignment="Stretch" />
+            </Grid>
         </Grid>
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Compact"
+                    Visibility="{Binding ScannedText, Converter={StaticResource StringLengthToOppositeVisibilityConverter}}">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Cancel" 
+                              Label="cancel" 
+                              Command="{Binding GoToMainCommand}" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

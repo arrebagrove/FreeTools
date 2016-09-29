@@ -12,6 +12,7 @@
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:BooleanToOppositeVisibilityConverter x:Key="BooleanToOppositeVisibilityConverter" />
         <converters:StringLengthToOpacityConverter x:Key="StringLengthToOpacityConverter" />
+        <converters:StringLengthToOppositeVisibilityConverter x:Key="StringLengthToOppositeVisibilityConverter" />
         <converters:StringLengthToVisibilityConverter x:Key="StringLengthToVisibilityConverter" />
     </Application.Resources>
 </Application>

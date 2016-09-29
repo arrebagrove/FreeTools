@@ -92,6 +92,7 @@
     <Compile Include="Converters\StringLengthToOpacityConverter.cs" />
     <Compile Include="Converters\BooleanToOppositeVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\StringLengthToOppositeVisibilityConverter.cs" />
     <Compile Include="Converters\StringLengthToVisibilityConverter.cs" />
     <Compile Include="Extensions\IPropertySetExtensions.cs" />
     <Compile Include="Extensions\ISettingsExtensions.cs" />

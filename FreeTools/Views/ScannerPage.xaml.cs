@@ -14,6 +14,8 @@ using Windows.UI.Core;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using ZXing.Common;
+using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace FreeTools.Views
 {
@@ -37,7 +39,7 @@ namespace FreeTools.Views
 
         private ScannerViewModel ViewModel
         {
-            get { return DataContext as ScannerViewModel; }
+            get { return SimpleIoc.Default.GetInstance<ScannerViewModel>(); }
         }
 
         public ScannerPage()
@@ -101,6 +103,8 @@ namespace FreeTools.Views
             await _videoDevice.ExposureControl.SetAutoAsync(true);
 
             _initialized = true;
+
+            ViewModel.ScannedText = "http://microsoft.com";
         }
 
         private async void OnPreviewFrameAvailable(IImageSize args)
@@ -129,7 +133,7 @@ namespace FreeTools.Views
         {
             await Task.Run(() =>
             {
-                if (_decoding) return;
+                if (_decoding || !string.IsNullOrWhiteSpace(ViewModel.ScannedText)) return;
 
                 _decoding = true;
 
@@ -177,7 +181,17 @@ namespace FreeTools.Views
 
             await StatusBar.GetForCurrentView().ShowAsync();
 
+            Messenger.Default.Unregister(this);
+
             Dispose();
+        }
+
+        private void ToggleResultGrid(bool showResult)
+        {
+            if (showResult)
+                ShowResultStoryboard.Begin();
+            else
+                HideResultStoryboard.Begin();
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -185,6 +199,8 @@ namespace FreeTools.Views
             base.OnNavigatedTo(e);
 
             await StatusBar.GetForCurrentView().HideAsync();
+
+            Messenger.Default.Register<bool>(this, ToggleResultGrid);
 
             Initialize();
         }
