@@ -109,6 +109,11 @@ namespace FreeTools.ViewModels
             }
         }
 
+        public RelayCommand TestCommand
+        {
+            get { return new RelayCommand(() => this.ScannedText = "http://microsoft.com"); }
+        }
+
         public async Task<DeviceInformation> GetCameraIdAsync(Panel panel) => await _systemService.GetCameraIdAsync(panel);
     }
 }

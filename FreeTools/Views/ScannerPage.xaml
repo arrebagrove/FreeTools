@@ -10,16 +10,14 @@
     DataContext="{Binding Scanner, Source={StaticResource Locator}}">
     <Page.Resources>
         <Storyboard x:Name="ShowResultStoryboard">
-            <DoubleAnimation Duration="0:0:0.6" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ResultGrid" d:IsOptimized="True">
+            <DoubleAnimation Duration="0:0:0.5" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ResultGrid" d:IsOptimized="True">
                 <DoubleAnimation.EasingFunction>
                     <ExponentialEase Exponent="6" EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Duration="0:0:0.6" To="100" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ResultGrid" d:IsOptimized="True"/>
         </Storyboard>
         <Storyboard x:Name="HideResultStoryboard">
-            <DoubleAnimation Duration="0:0:0.3" To="300" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ResultGrid" d:IsOptimized="True"/>
-            <DoubleAnimation Duration="0:0:0.3" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ResultGrid" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.4" To="300" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ResultGrid" d:IsOptimized="True"/>
         </Storyboard>
     </Page.Resources>
 
@@ -28,7 +26,8 @@
                Stretch="UniformToFill"
                Opacity="{Binding ScannedText, Converter={StaticResource StringLengthToOpacityConverter}}" />
 
-        <Grid x:Name="ResultGrid" VerticalAlignment="Bottom"
+        <Grid x:Name="ResultGrid" 
+              VerticalAlignment="Bottom"
               Background="{ThemeResource ContentDialogBackgroundThemeBrush}"
               RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
@@ -87,6 +86,7 @@
                 <AppBarButton Icon="Cancel" 
                               Label="cancel" 
                               Command="{Binding GoToMainCommand}" />
+                <AppBarButton Icon="Refresh" Label="test" Command="{Binding TestCommand}" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

@@ -103,8 +103,6 @@ namespace FreeTools.Views
             await _videoDevice.ExposureControl.SetAutoAsync(true);
 
             _initialized = true;
-
-            ViewModel.ScannedText = "http://microsoft.com";
         }
 
         private async void OnPreviewFrameAvailable(IImageSize args)

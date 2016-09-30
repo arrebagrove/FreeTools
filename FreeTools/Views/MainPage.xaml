@@ -84,18 +84,77 @@
                 </Viewbox>
             </Grid>
 
-            <TextBlock Text="QR code scanner" 
-                       Style="{ThemeResource ControlHeaderTextBlockStyle}" 
-                       Margin="0,19,0,0" />
-            <Button Content="Scan QR code"
-                    Command="{Binding GoToScannerCommand}" />
+            <Grid Margin="0,38,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Background media player" 
-                       Style="{ThemeResource ControlHeaderTextBlockStyle}" 
-                       Margin="0,19,0,0" />
-            <Button Content="Stop player"
-                    IsEnabled="{Binding BackgroundMediaPlayerActive}"
-                    Command="{Binding StopBackgroundMediaPlayerCommand}" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Column="0"
+                           Grid.Row="0"
+                           Text="QR code scanner" 
+                           Style="{ThemeResource ControlHeaderTextBlockStyle}" />
+                <Button Grid.Column="0" 
+                        Grid.Row="1" 
+                        Content="Scan QR code"
+                        Command="{Binding GoToScannerCommand}" />
+
+
+                <Path Grid.Column="1" 
+                      Grid.Row="0" 
+                      Grid.RowSpan="2"
+                      Margin="6,0"
+                      Width="42" 
+                      Height="42" 
+                      Stretch="Fill" 
+                      Fill="{ThemeResource PhoneForegroundBrush}"
+                      Data="F1 M 22.1667,22.1667L 25.3333,22.1667L 25.3333,25.3333L 22.1667,25.3333L 22.1667,22.1667 Z M 18.9999,19.0002L 28.4999,19.0002L 28.4999,28.5002L 18.9999,28.5002L 18.9999,19.0002 Z M 20.5832,20.5835L 20.5832,26.9169L 26.9166,26.9169L 26.9166,20.5835L 20.5832,20.5835 Z M 50.6665,22.1669L 53.8331,22.1669L 53.8331,25.3335L 50.6665,25.3335L 50.6665,22.1669 Z M 47.4998,19.0002L 56.9998,19.0002L 56.9998,28.5002L 47.4998,28.5002L 47.4998,19.0002 Z M 49.0831,20.5835L 49.0831,26.9169L 55.4165,26.9169L 55.4165,20.5835L 49.0831,20.5835 Z M 22.1666,50.6668L 25.3332,50.6668L 25.3332,53.8334L 22.1666,53.8334L 22.1666,50.6668 Z M 18.9999,47.5001L 28.4999,47.5001L 28.4999,57.0001L 18.9999,57.0001L 18.9999,47.5001 Z M 20.5832,49.0834L 20.5832,55.4168L 26.9166,55.4168L 26.9166,49.0834L 20.5832,49.0834 Z M 18.9999,31.6669L 22.1666,31.6669L 22.1666,34.8335L 25.3332,34.8335L 25.3332,38.0002L 31.6666,38.0002L 31.6666,34.8335L 25.3333,34.8334L 25.3333,31.6667L 31.6666,31.6669L 31.6666,34.8335L 37.9998,34.8335L 37.9998,41.1668L 34.8332,41.1668L 34.8332,44.3334L 41.1665,44.3334L 41.1665,50.6667L 37.9998,50.6667L 37.9999,53.8334L 41.1665,53.8334L 41.1665,57.0001L 37.9999,57.0001L 37.9999,53.8334L 34.8333,53.8333L 34.8333,57L 31.6667,57L 31.6667,47.5L 34.8332,47.5001L 34.8333,50.6667L 37.9998,50.6667L 37.9998,47.5001L 34.8333,47.5L 34.8332,44.3334L 31.6667,44.3333L 28.5,44.3333L 28.4999,41.1668L 22.1666,41.1669L 22.1666,44.3334L 18.9999,44.3334L 18.9999,41.1668L 22.1666,41.1669L 22.1666,34.8335L 18.9999,34.8335L 18.9999,31.6669 Z M 34.8332,38.0002L 31.6666,38.0002L 31.6667,41.1667L 34.8332,41.1668L 34.8332,38.0002 Z M 41.1665,34.8335L 44.3332,34.8335L 44.3332,31.6668L 37.9999,31.6668L 37.9999,28.5001L 34.8332,28.5001L 34.8332,31.6668L 31.6666,31.6668L 31.6666,28.5001L 34.8332,28.5001L 34.8332,25.3334L 31.6666,25.3334L 31.6667,19L 34.8333,19L 34.8332,25.3334L 37.9999,25.3334L 37.9999,22.1668L 41.1666,22.1668L 41.1666,19.0001L 44.3333,19.0001L 44.3332,25.3334L 41.1666,25.3334L 41.1666,28.5001L 44.3332,28.5001L 44.3333,31.6667L 47.5,31.6667L 47.5,38L 50.6666,38.0001L 50.6666,41.1667L 53.8333,41.1667L 53.8333,47.5L 57,47.5L 56.9999,53.8334L 53.8333,53.8334L 53.8333,50.6667L 50.6666,50.6667L 50.6666,57L 44.3333,57L 44.3333,53.8334L 47.5,53.8334L 47.5,50.6667L 44.3333,50.6667L 44.3333,47.5L 47.5,47.5L 47.5,50.6667L 50.6666,50.6667L 50.6666,44.3334L 47.4999,44.3334L 47.4999,38.0001L 44.3332,38.0001L 44.3332,44.3334L 41.1667,44.3333L 41.1665,34.8335 Z M 50.6665,31.6668L 53.8332,31.6668L 53.8333,34.8334L 56.9999,34.8334L 56.9999,38L 50.6667,38L 50.6665,31.6668 Z "/>
+            </Grid>
+
+            <Grid Margin="0,19,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" 
+                           Grid.Row="0"
+                           Text="Background media player" 
+                           Style="{ThemeResource ControlHeaderTextBlockStyle}" />
+                <Button Grid.Column="0"
+                        Grid.Row="1"
+                        Content="Stop player"
+                        IsEnabled="{Binding BackgroundMediaPlayerActive}"
+                        Command="{Binding StopBackgroundMediaPlayerCommand}" />
+
+                <Viewbox Grid.Column="1" 
+                         Grid.Row="0" 
+                         Grid.RowSpan="2" 
+                         Width="48" 
+                         Height="48">
+                    <Canvas Width="524" Height="524">
+                        <Path Width="13.9637" Height="15.7703" Canvas.Left="307.364" Canvas.Top="234.115" Stretch="Fill" StrokeThickness="20" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Data="M 313.364,242L 315.328,243.885L 315.328,240.115L 313.364,242 Z "/>
+                        <Path Width="14.5992" Height="16.9918" Canvas.Left="185.723" Canvas.Top="233.503" Stretch="Fill" StrokeThickness="20" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Data="F1 M 194.322,242L 191.723,239.503L 191.723,244.495L 194.322,242 Z "/>
+                        <Path Width="21.7547" Height="22.352" Canvas.Left="337.439" Canvas.Top="87.8976" Stretch="Fill" StrokeThickness="20" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Fill="{ThemeResource PhoneForegroundBrush}" Data="F1 M 343.439,98.7932C 346.761,100.572 350.012,102.391 353.193,104.25C 353.193,101.648 351.644,98.1979 348.544,93.8976L 343.439,98.7932 Z "/>
+                        <Path Width="197.542" Height="171.75" Canvas.Left="164.987" Canvas.Top="352.25" Stretch="Fill" StrokeThickness="20" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Fill="{ThemeResource PhoneForegroundBrush}" Data="F1 M 352.202,453.247C 355.087,444.636 356.529,435.537 356.529,425.95L 356.529,397.76L 315.328,358.25L 315.328,379.366C 309.437,376.782 303.637,374.831 297.927,373.51C 292.217,372.19 285.756,371.53 278.544,371.53C 264.9,371.53 251.587,373.797 238.604,378.332C 228.507,381.834 219.296,386.412 210.971,392.067C 202.647,397.721 195.524,404.007 189.604,410.924C 183.684,417.842 179.101,425.247 175.855,433.14C 172.61,441.034 170.987,448.884 170.987,456.691C 170.987,463.005 172.189,469.377 174.593,475.807C 176.997,482.294 180.558,488.12 185.277,493.287C 189.995,498.453 195.6,502.859 202.091,506.505C 208.582,510.15 215.84,512.977 223.864,514.986C 231.888,516.995 240.317,518 249.153,518C 262.856,518 276.17,515.704 289.092,511.111C 300.091,507.38 309.783,502.615 318.168,496.817C 326.552,491.019 333.599,484.461 339.309,477.142C 345.019,469.822 349.317,461.857 352.202,453.247 Z "/>
+                        <Path Width="163.716" Height="140.153" Canvas.Left="185.723" Canvas.Top="50.6317" Stretch="Fill" StrokeThickness="20" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Data="F1 M 306.222,81.6892C 298.889,78.8763 290.925,76.0491 282.33,73.2075C 273.735,70.366 264.584,67.7683 254.878,65.4147C 245.171,63.061 235.028,61.1093 224.45,59.5593C 213.871,58.0093 202.962,57.0334 191.723,56.6317L 191.723,125.224L 253.764,184.784L 343.439,98.7932C 331.885,92.6071 319.48,86.9057 306.222,81.6892 Z "/>
+                        <Path Width="210.023" Height="131.224" Canvas.Left="144.521" Canvas.Top="0" Stretch="Fill" StrokeThickness="20" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Fill="{ThemeResource PhoneForegroundBrush}" Data="F1 M 160.889,6L 150.521,16.0746L 150.521,85.6709L 191.723,125.224L 191.723,56.6317C 202.962,57.0334 213.871,58.0093 224.45,59.5593C 235.028,61.1093 245.171,63.061 254.878,65.4147C 264.584,67.7683 273.735,70.366 282.33,73.2075C 290.925,76.0491 298.889,78.8763 306.222,81.6892C 319.48,86.9057 331.885,92.6071 343.439,98.7932L 348.544,93.8976C 347.676,92.6933 346.686,91.4223 345.575,90.0847C 340.496,83.971 333.449,77.269 324.433,69.9785C 315.418,62.688 304.809,55.2539 292.608,47.6765C 280.407,40.0989 267.169,33.2102 252.894,27.0104C 238.619,20.8106 223.653,15.759 207.996,11.8554C 192.339,7.95172 176.637,6 160.889,6 Z "/>
+                        <Path Width="197.723" Height="171.955" Canvas.Left="0" Canvas.Top="193.928" Stretch="Fill" StrokeThickness="20" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Fill="{ThemeResource PhoneForegroundBrush}" Data="F1 M 37.2393,349.099C 43.7005,352.744 50.913,355.571 58.8769,357.58C 62.9708,358.613 67.1878,359.38 71.5279,359.882L 191.723,244.495L 191.723,239.503L 150.521,199.928L 150.521,221.96C 144.571,219.376 138.711,217.381 132.941,215.975C 127.171,214.569 120.709,213.865 113.557,213.865C 99.8531,213.865 86.54,216.162 73.6176,220.754C 63.4599,224.256 54.2188,228.834 45.8944,234.488C 37.5699,240.143 30.4626,246.4 24.5723,253.26C 18.682,260.12 14.1141,267.453 10.8685,275.261C 7.62281,283.068 6,290.932 6,298.854C 6,305.284 7.20207,311.742 9.60628,318.229C 11.9504,324.658 15.5266,330.499 20.3349,335.752C 25.1433,341.004 30.7781,345.453 37.2393,349.099 Z "/>
+                        <Path Width="214.672" Height="122.604" Canvas.Left="309.328" Canvas.Top="166.834" Stretch="Fill" StrokeThickness="20" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Fill="{ThemeResource PhoneForegroundBrush}" Data="F1 M 385.412,172.834L 315.328,240.115L 315.328,243.885L 356.529,283.439L 356.529,214.038C 367.829,214.439 378.753,215.458 389.301,217.094C 399.85,218.731 409.992,220.682 419.729,222.95C 429.466,225.217 438.632,227.801 447.227,230.7C 455.822,233.599 463.756,236.454 471.028,239.267C 488.098,246.156 503.755,253.762 518,262.086C 518,258.757 515.461,253.992 510.382,247.792C 505.303,241.592 498.286,234.862 489.33,227.6C 480.375,220.338 469.766,212.904 457.505,205.298C 445.244,197.691 432.005,190.788 417.791,184.589C 407.377,180.047 396.584,176.128 385.412,172.834 Z "/>
+                        <Path Width="412" Height="396" Canvas.Left="48.0001" Canvas.Top="44" Stretch="Fill" StrokeThickness="20" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Fill="{ThemeResource PhoneForegroundBrush}" Data="F1 M 54.0001,376.709L 194.322,242L 54.0001,107.215L 113.364,50L 253.764,184.784L 394.322,50L 454,106.989L 313.364,242L 454,377.011L 394.322,434L 253.764,299.216L 113.364,434L 54.0001,376.709 Z "/>
+                    </Canvas>
+                </Viewbox>
+            </Grid>
         </StackPanel>
     </Grid>
 </Page>
