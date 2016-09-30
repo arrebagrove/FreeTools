@@ -11,6 +11,7 @@
         <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:BooleanToOppositeVisibilityConverter x:Key="BooleanToOppositeVisibilityConverter" />
+        <converters:FixedAlphaBrushColorConverter x:Key="FixedAlphaBrushColorConverter" />
         <converters:StringLengthToOpacityConverter x:Key="StringLengthToOpacityConverter" />
         <converters:StringLengthToOppositeVisibilityConverter x:Key="StringLengthToOppositeVisibilityConverter" />
         <converters:StringLengthToVisibilityConverter x:Key="StringLengthToVisibilityConverter" />

@@ -39,52 +39,49 @@
             <ToggleSwitch Header="Turn Flashlight" 
                           IsEnabled="{Binding TorchSupported, UpdateSourceTrigger=PropertyChanged}"
                           IsOn="{Binding FlashTurnedOn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            
-            <Slider Header="Light intensity" 
-                    Visibility="{Binding FlashPowerSupported, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    Value="{Binding FlashPowerValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                    Minimum="0"
-                    Maximum="1.0"
-                    SnapsTo="StepValues"
-                    StepFrequency="0.25"
-                    TickFrequency="0.25"
-                    TickPlacement="Inline"
-                    Margin="0,9.5,0,0" />
 
-            <Grid Visibility="{Binding FlashPowerSupported, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid Margin="0,9.5,0,0"
+                  Visibility="{Binding FlashPowerSupported, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                
-                <Viewbox Grid.Column="0" 
-                         Width="120" 
-                         Height="40">
-                    <Path Width="480"  
-                          Stretch="Fill" 
-                          StrokeLineJoin="Round" 
-                          StrokeThickness="11" 
-                          Stroke="{ThemeResource PhoneForegroundBrush}" 
-                          Fill="Transparent" 
-                          Data="F1 M 128,272.667L 416,272.667L 512,240.667L 512,400.667L 416,368.667L 128,368.667L 128,272.667 Z "/>
-                </Viewbox>
 
-                <Viewbox Grid.Column="1" 
-                         Height="40" 
-                         Opacity="{Binding FlashPowerValue, UpdateSourceTrigger=PropertyChanged}">
-                    <Path Height="193" 
-                          Stretch="Fill" 
-                          StrokeLineJoin="Round" 
-                          Stroke="Transparent" 
-                          StrokeThickness="0" 
-                          Fill="{ThemeResource PhoneAccentBrush}" 
-                          Data="F1 M 128,288L 512,224L 512,416L 128,352L 128,288 Z " 
-                          UseLayoutRounding="False" 
-                          Width="1100"/>
-                </Viewbox>
+                <Slider Grid.Column="0" 
+                        Header="Light intensity" 
+                        Visibility="{Binding FlashPowerSupported, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Value="{Binding FlashPowerValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        Minimum="0"
+                        Maximum="1.0"
+                        SnapsTo="StepValues"
+                        StepFrequency="0.25"
+                        TickFrequency="0.25"
+                        TickPlacement="Inline" />
+
+                <Path Grid.Column="2" 
+                      Width="96" 
+                      Height="64" 
+                      Stretch="Fill" 
+                      Fill="Transparent" 
+                      Stroke="{ThemeResource PhoneForegroundBrush}"
+                      StrokeThickness="3"
+                      Data="M 25,37L 25,23C 25,20.8139 26.8167,19 29,19L 47,19C 49.1833,19 51,20.8139 51,23L 51,37M 38,24C 38.5523,24 39,24.4477 39,25C 39,25.5523 38.5523,26 38,26C 37.4477,26 37,25.5523 37,25C 37,24.4477 37.4477,24 38,24 Z M 38,28C 39.1046,28 40,28.8954 40,30C 40,31.1046 39.1046,32 38,32C 36.8954,32 36,31.1046 36,30C 36,28.8954 36.8954,28 38,28 Z "/>
+
+                <Ellipse Grid.Column="2" 
+                         Width="48" 
+                         Height="48" 
+                         VerticalAlignment="Top" 
+                         HorizontalAlignment="Center" 
+                         Opacity="{Binding FlashPowerValue, UpdateSourceTrigger=PropertyChanged}"
+                         Fill="{ThemeResource PhoneAccentBrush}"
+                         StrokeThickness="4"
+                         Stroke="{Binding RelativeSource={RelativeSource Self}, Path=Fill, Converter={StaticResource FixedAlphaBrushColorConverter}}"
+                         Margin="0,6,0,0">
+                </Ellipse>
             </Grid>
 
-            <Grid Margin="0,38,0,0">
+            <Grid Margin="0,19,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -151,7 +148,7 @@
                         <Path Width="210.023" Height="131.224" Canvas.Left="144.521" Canvas.Top="0" Stretch="Fill" StrokeThickness="20" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Fill="{ThemeResource PhoneForegroundBrush}" Data="F1 M 160.889,6L 150.521,16.0746L 150.521,85.6709L 191.723,125.224L 191.723,56.6317C 202.962,57.0334 213.871,58.0093 224.45,59.5593C 235.028,61.1093 245.171,63.061 254.878,65.4147C 264.584,67.7683 273.735,70.366 282.33,73.2075C 290.925,76.0491 298.889,78.8763 306.222,81.6892C 319.48,86.9057 331.885,92.6071 343.439,98.7932L 348.544,93.8976C 347.676,92.6933 346.686,91.4223 345.575,90.0847C 340.496,83.971 333.449,77.269 324.433,69.9785C 315.418,62.688 304.809,55.2539 292.608,47.6765C 280.407,40.0989 267.169,33.2102 252.894,27.0104C 238.619,20.8106 223.653,15.759 207.996,11.8554C 192.339,7.95172 176.637,6 160.889,6 Z "/>
                         <Path Width="197.723" Height="171.955" Canvas.Left="0" Canvas.Top="193.928" Stretch="Fill" StrokeThickness="20" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Fill="{ThemeResource PhoneForegroundBrush}" Data="F1 M 37.2393,349.099C 43.7005,352.744 50.913,355.571 58.8769,357.58C 62.9708,358.613 67.1878,359.38 71.5279,359.882L 191.723,244.495L 191.723,239.503L 150.521,199.928L 150.521,221.96C 144.571,219.376 138.711,217.381 132.941,215.975C 127.171,214.569 120.709,213.865 113.557,213.865C 99.8531,213.865 86.54,216.162 73.6176,220.754C 63.4599,224.256 54.2188,228.834 45.8944,234.488C 37.5699,240.143 30.4626,246.4 24.5723,253.26C 18.682,260.12 14.1141,267.453 10.8685,275.261C 7.62281,283.068 6,290.932 6,298.854C 6,305.284 7.20207,311.742 9.60628,318.229C 11.9504,324.658 15.5266,330.499 20.3349,335.752C 25.1433,341.004 30.7781,345.453 37.2393,349.099 Z "/>
                         <Path Width="214.672" Height="122.604" Canvas.Left="309.328" Canvas.Top="166.834" Stretch="Fill" StrokeThickness="20" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Fill="{ThemeResource PhoneForegroundBrush}" Data="F1 M 385.412,172.834L 315.328,240.115L 315.328,243.885L 356.529,283.439L 356.529,214.038C 367.829,214.439 378.753,215.458 389.301,217.094C 399.85,218.731 409.992,220.682 419.729,222.95C 429.466,225.217 438.632,227.801 447.227,230.7C 455.822,233.599 463.756,236.454 471.028,239.267C 488.098,246.156 503.755,253.762 518,262.086C 518,258.757 515.461,253.992 510.382,247.792C 505.303,241.592 498.286,234.862 489.33,227.6C 480.375,220.338 469.766,212.904 457.505,205.298C 445.244,197.691 432.005,190.788 417.791,184.589C 407.377,180.047 396.584,176.128 385.412,172.834 Z "/>
-                        <Path Width="412" Height="396" Canvas.Left="48.0001" Canvas.Top="44" Stretch="Fill" StrokeThickness="20" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Fill="{ThemeResource PhoneForegroundBrush}" Data="F1 M 54.0001,376.709L 194.322,242L 54.0001,107.215L 113.364,50L 253.764,184.784L 394.322,50L 454,106.989L 313.364,242L 454,377.011L 394.322,434L 253.764,299.216L 113.364,434L 54.0001,376.709 Z "/>
+                        <Path Width="412" Height="396" Canvas.Left="48.0001" Canvas.Top="44" Stretch="Fill" StrokeThickness="32" StrokeLineJoin="Round" Stroke="{ThemeResource ApplicationPageBackgroundThemeBrush}" Fill="{ThemeResource PhoneAccentBrush}" Data="F1 M 54.0001,376.709L 194.322,242L 54.0001,107.215L 113.364,50L 253.764,184.784L 394.322,50L 454,106.989L 313.364,242L 454,377.011L 394.322,434L 253.764,299.216L 113.364,434L 54.0001,376.709 Z "/>
                     </Canvas>
                 </Viewbox>
             </Grid>
